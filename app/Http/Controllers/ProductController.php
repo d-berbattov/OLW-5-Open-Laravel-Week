@@ -14,7 +14,7 @@ class ProductController extends Controller
 {
 
 
-  public function __construct(protected ProductServices $ProductServices)
+  public function __construct(protected ProductServices $productServices)
   {}
 
 
@@ -24,7 +24,7 @@ class ProductController extends Controller
     public function index(): JsonResponse
     {
      Gate::authorize('app.products.list', Product::class);
-     $products = $this->ProductServices->list();
+     $products = $this->productServices->list();
 
      return response()->json($products);
     }
@@ -35,7 +35,7 @@ class ProductController extends Controller
     public function store(ProductStoreRequest $request)
     {
         Gate::authorize('create', Product::Class);
-        $product = $this->ProductServices->store($request);
+        $product = $this->productServices->store($request);
 
         return response()->json($product);
     }
