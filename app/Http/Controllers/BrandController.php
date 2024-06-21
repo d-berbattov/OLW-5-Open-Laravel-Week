@@ -63,6 +63,6 @@ class BrandController extends Controller
     {
        $this->brandServices->destroy($brand);
       \Illuminate\Support\Facades\Gate::authorize('delete', $brand);
-       return response()->json(["message" => "Brande deleted"]);
+       return response()->json(["message" => "Brand deleted"]);
     }
 }
