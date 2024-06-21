@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductStoreRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Product;
 
 use App\Services\ProductServices;
@@ -45,15 +46,20 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+      Gate::authorize('view', $product);
+
+      return response()->json($product);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
-        //
+      Gate::authorize('update', $product);
+      $product = $this->productServices->update($request, $product);
+
+      return response()->json($product);
     }
 
     /**
@@ -61,6 +67,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+      Gate::authorize('delete', $product);
+      $this->productServices->destroy($product);
+
+      return response()->json(['product' => 'deleted']);
     }
 }
