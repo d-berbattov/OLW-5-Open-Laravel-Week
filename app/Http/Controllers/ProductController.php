@@ -52,7 +52,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storage.N
      */
     public function update(ProductUpdateRequest $request, Product $product)
     {
